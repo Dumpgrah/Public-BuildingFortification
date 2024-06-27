@@ -1,0 +1,65 @@
+"Language","original","english","german","russian","hungarian","italian","spanish","french","portuguese","chinese","Japanese",
+
+"str_bf_opencurtain","Open Curtain","Open Curtain","Vorhang offen","Открытая штора","Nyissa ki a fuggonyt","Tenda aperta","Cortina aberta","Rideau ouvert","Cortina aberta","开启窗帘","開いたカーテン",
+
+"str_bf_closedcurtain","Closed Curtain","Closed Curtain","Vorhang geschlossen","Закрытая штора","Zarja be a fuggonyt","Tenda chiusa","Cortina cerrada","Rideau fermé","Cortina aberta","关闭窗帘","閉じたカーテン",
+
+"str_bf_crossboard","Cross Board","Cross Board","Tür Abriegelung","Засов","Cross board","Asse di incrocio","Tablon de cierre","Planche de barricade","Tábua de encerramento","交叉板","クロスした板",
+
+"str_bf_windowbarricade","Window Barricade","Window Barricade","Fenster Barrikade","Баррикада для окна","Ablak barikad","Finestra blindata","Barricada de Ventana","Barricade de fenêtre","	Barricada de janelas","窗户防御","窓バリケード",
+
+"str_bf_bfswafh","Barricade for securing windows and fortifying houses","Barricade for securing windows and fortifying houses","Barrikade um Fenster und Häuser zu sichern","Баррикада для защиты окон и укрепления домов","Barikad az ablakok vadelmare as a hazak megerositesere","Blindatura per finestre di sicurezza e casa fortificata","Barricada para asegurar y fortificar ventanas","Barricade pour sécuriser les fenêtres et fortifier les maisons","Barricada para cobrir janelas e fortificar estruturas","用于固定窗户和加固房屋的防御性建筑","窓を補強し家を要塞化するバリケード",
+
+"str_bf_curtainmount","Curtain Mount","Curtain Mount","Vorhang Halter","Крепление для штор","Fuggoyn Tarto","Montaggio della tenda","Montura de cortina","Support de rideau","Montagem em cortina","窗帘","カーテンマウント",
+
+"str_bf_barricadebase","Barricade Base","Barricade Base","Barrikaden Basis","Основа баррикады","Barikad Bazis","Blindatura basica","Base de Barricada","Fondation des barricades","Alicerce","建筑地基","バリケードの土台",
+
+"str_bf_boardupwindow",Board up window","Board up window","	Fenster barrikadieren","Заколотить окно","Ablak Blokkolasa","Sigilla la finestra","Barricada simple","Barricader la fenêtre","Barricada simples","用木板封住窗户","板で窓を塞ぐ",
+
+"str_bf_addmoreboards","Add More Boards","Add More Boards","Mehr Bretter hinzufügen","Добавить досок","Tablak Hozzaadasa","Aggiungi più assi","Barricada fortificada","Ajouter plus de planches","Barricada reforçada","添加更多木板","板を追加する",
+
+"str_bf_windowbarricadekit","Window Barricade Kit","Window Barricade Kit","Fenster Barrikaden Bausatz","Комплект для баррикадирования окон","Ablak barikad doboz","	Kit per finestra blindata","Kit de barricada de Ventanas","Kit de barricade de fenêtre","Kit de barricada de janela","窗户防御套件","窓バリケードキット",
+
+"str_bf_pfbw","Used in Preparing for Barricading Windows","Used in Preparing for Barricading Windows","Zum Fenster absichern benutzt","Используется при подготовке к баррикадированию окон","Az ablakok elbarikadozasara valo felkeszulesben hasznalatos","Usa per preparare la finestra blindata","Utilizado para la fortificación de ventanas","Utilisé pour construire une barricade de fenêtre","Utilizada para a fabricação de barricadas de janelas","用于准备窗户防御","窓を塞ぐ作業の準備に使う",
+
+"str_bf_doorbarricade","Door Barricade","Door Barricade","Tür Barrikade","Баррикада для двери","Ajto barikad","Porta blindata","Barricada de Puertas","Barricade de porte","Barricada de portas","门口防御","扉バリケード",
+
+"str_bf_bfsdafh","Barricade for securing doors and fortiying houses","Barricade for securing doors and fortiying houses","Barrikade um Türen und Häuser zu sichern","Баррикада для защиты дверей и укрепления домов","Barikad ajtok rogzitesere es hazak biztositasara","Blindatura per porta di sicurezza e casa fortificata","Barricada para asegurar y fortificar puertas","Barricade pour sécuriser les portes et fortifier les maisons","Barricada para cobertura de portões e estruturas fortificantes","用于固定门和防御房屋的防御性建筑","扉を補強し家を要塞化するバリケード",
+
+"str_bf_lowerframe","Lower Frame","Lower Frame","Unterer Rahmen","Нижняя рама","Also Keret","Telaio inferiore","Marco Inferior","Cadre inférieur","Estrutura inferior","底部框架","下部の枠",
+
+"str_bf_upperframe","Upper Frame","Upper Frame","Oberer Rahmen","Верхняя рама","Felso Keret","Telaio superiore","Marco Superior","Cadre supérieur","Estrutura superior","顶部框架","上部の枠",
+
+"str_bf_outfirstplanks","Outer Low First Planks","Outer Low First Planks","Untere Planken Außen Erster Schritt","Внешние нижние доски","kulso also elso deszka","Assi principali basse esterne","Muro exterior inicial (Inferior)","Planches inférieures externes initiales","Parede externa primária (Inferior)","底部外面第一层木板","外側下部最初の木の板",
+
+"str_bf_outerupperfirstplank","Outer Upper first Planks","Outer Upper first Planks","Obere Planken Außen Erster Schritt","Внешние верхние доски","kulso felso elso deszka","Assi principali alte esterne	Muro exterior inicial (Superior)","Planches supérieures externes initiales","Parede externa primária (Superior)","顶部外面第一层木板","外側上部最初の木の板",
+
+"str_bf_finalouterlowplanks","Final Outer Low Planks","Final Outer Low Planks","Untere Planken Außen Letzter Schritt","Внешние нижние доски, усиление","Vegso kulso also elso deszka","Assi finali basse esterne","Muro exterior final (Inferior)","Planches inférieures externes finales","Parede externa reforçada (Inferior)","底部外面最后一层木板","外側下部最後の木の板",
+
+"str_bf_finalouterupperplank","Final outer Upper Planks","Final outer Upper Planks","Obere Planken Außen Letzter Schritt","Внешние верхние доски, усиление","Vegso kulso felso elso deszka","Assi finali alte esterne","Muro exterior final (Superior)","Planches supérieures externes finales","Parede externa reforçada (Superior)","顶部外面最后一层木板","外側上部最後の木の板",
+
+"str_bf_outerlowplate","Outer low Plate","Outer low Plate","Obere Stahlplatte Außen","Внешняя нижняя пластина","Kulso also tabla","Piastra interna bassa","Metal exterior (Inferior)","Métal inférieur extérieur","Parede externa metálica (Inferior)","底部外面铁板层","外側下部の金属板",
+
+"str_bf_outerupplate","Outer Up plate","Outer Up plate","Untere Stahlplatte Außen","Внешняя верхняя пластина","Kulso felso tabla","	Piastra interna alta","Metal exterior (Superior)","Métal supérieur extérieur","Parede externa metálica (Superior)","顶部外面铁板层","外側上部の金属板",
+
+"str_bf_innerlowerplank","Inner Lower Planks","Inner Lower Planks","Untere Planken Innen","Внутренние нижние доски","Belso also deszkak","Assi interne basse","Muro interior (Inferior)","Planches inférieures intérieures","Parede interna de madeira (Inferior)","底部里面木板层","内側下部の木の板",
+
+"str_bf_innerupperplank","Inner Upper Planks","Inner Upper Planks","Obere Planken Innen","Внутренние верхние доски","Belso felso deszkak","	Assi interne alte","Muro interior (Superior)","Planches supérieures intérieures","Parede interna de madeira (Superior","顶部里面木板层","内側上部の木の板",
+
+"str_bf_innerlowerplate","Inner Lower Plate","Inner Lower Plate","Untere Stahlplatte Innen","Внутренняя нижняя пластина","Belso also tabla","Piastra interna bassa","Metal interior (Inferior)","Métal inférieur intérieur","Parede interna metálica (Inferior)","底部里面铁板层","内側下部の金属板",
+
+"str_bf_innerupperplate","Inner Upper Plate","Inner Upper Plate","Obere Stahlplatte Innen","Внутренняя верхняя пластина","Belso felso table","Piastra interna alta","Metal interior (Superior)","Métal supérieur intérieur","Parede interna metálica (Superior)","顶部顶部铁板层","内側上部の金属板",
+
+"str_bf_hinges","Hinges","Hinges","Scharnier (singular) Scharniere (plural)","Петли","Zsaner","Cerniere","Bisagras","Charnières","Dobradiças","铰链","蝶番",
+
+"str_bf_postholders","Post Holders","Post Holders","Pfosten Halter","Держатели засова","Faoszlop tamogatas","Supporto principale","	Soporte de poste","Supports de barricade de porte","Suportes de madeira","两侧门闩","両側の閂かすがい",
+
+"str_bf_middleholders","Middle Holders","Middle Holders","Mittlerer Halter","Держатели засова на двери","Kozepso faoszlop tamogatas","Supporto medio","Bisagra central","Supports de barricade de porte","Suporte central","中部门闩","真ん中の閂かすがい",
+
+"str_bf_doorbarricadekit","Door Barricade Kit","Door Barricade Kit","Tür Barrikaden Bausatz","Комплект для баррикадирования дверей","Ajto barikad doboz","Kit porta blindata","Kit de barricada de Puertas","Supports central de barricade de porte","Kit de barricada de portas","门口防御套件","扉バリケードキット",
+
+"str_bf_uipfbd","Used in Preparing for Barricading Door","Used in Preparing for Barricading Door","Zur Tür Barrikadierung benutzt","Используется при подготовке к баррикадированию двери","Az ajto elbarikadozasara valo felkeszuleshez hasznalt","Utilizza per preparare la porta blindata","Utilizado para la fortificación de puertas","Utilisé pour construire une barricade de porte","Utilizada para a fabricação de barricadas de portas","用于准备门口防御","扉を塞ぐ作業の準備に使う",
+
+"str_bf_burlapcloth","Burlap Cloth","Burlap Cloth","Sackleinen Streifen","Мешковина","Zsakvaszon szovet","Tela di Juta","Tela de Arpillera","Toile de jute","Tecido de estopa","粗麻布","黄麻布",
+
+"str_bf_burlapsewncloth","Burlap sewn cloth, I could use this to obscure people view maybe?","Burlap sewn cloth, I could use this to obscure people view maybe?","Genahter Sackleinen Streifen, kann dass vielleicht zum Augen verbinden benutzt werden?","Прошитая мешковина, можно прикрыть окно от любопытных глаз.","Burlap varrt ruhat tudtam hasznalni ezt, hogy blokkolja az emberek latni belul talan?","Tela di Juta, forse potrei utilizzarla per oscurare la visuale delle persone?","Trozo de tela de aprillera, ¿Tal vez pueda usarla para dificultar la vision desde fuera?","Toile de jute, peut-être que je pourrais l'utiliser pour obscurcir la vue des gens ?","Tecido de estopa, ¿Talvez eu possa usá-lo para evitar que ele se mostre através?","粗麻布缝制的布，也许能用它来遮挡人们的视线？","黄麻布を縫った生地。これなら人の視界を遮ることができるかも？",

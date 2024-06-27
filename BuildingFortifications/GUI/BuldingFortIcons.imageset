@@ -1,0 +1,56 @@
+ImageSetClass {
+ Name "BuildingFortIcons"
+ RefSize 1920 1920
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "{5AB71D697220AC51}BuildingFortifications/GUI/imagesets/Building Fortification Icons.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass OpenWindow {
+   Name "OpenWindow"
+   Pos 3 1
+   Size 441 404
+   Flags 0
+  }
+  ImageSetDefClass ClosedCurtain {
+   Name "ClosedCurtain"
+   Pos 464 0
+   Size 422 389
+   Flags 0
+  }
+  ImageSetDefClass MasterCurtainIcon {
+   Name "MasterCurtainIcon"
+   Pos 6 412
+   Size 499 259
+   Flags 0
+  }
+  ImageSetDefClass WindowBarricade {
+   Name "WindowBarricade"
+   Pos 896 6
+   Size 345 378
+   Flags 0
+  }
+  ImageSetDefClass PostsPLusFrame {
+   Name "PostsPLusFrame"
+   Pos 1079 694
+   Size 400 400
+   Flags ISVerticalTile
+  }
+  ImageSetDefClass BuildBarricadeDoor {
+   Name "BuildBarricadeDoor"
+   Pos 618 691
+   Size 400 400
+   Flags ISVerticalTile
+  }
+  ImageSetDefClass Barricade {
+   Name "Barricade"
+   Pos 23 686
+   Size 450 450
+   Flags 0
+  }
+ }
+ Groups {
+ }
+}
