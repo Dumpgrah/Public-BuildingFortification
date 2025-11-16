@@ -1,7 +1,6 @@
 class ActionCloseBuildingCore: ActionInteractBase
 {
 	ref NoiseParams m_NoisePar;
-	const string SELECTION_INTERACT = "door_interact";
 	
 	void ActionCloseBuildingCore()
 	{
@@ -32,12 +31,8 @@ class ActionCloseBuildingCore: ActionInteractBase
 			{
 				array<string> selections = new array<string>;
 				targetObject.GetActionComponentNameList(target.GetComponentIndex(), selections);
+				return true;
 				
-				for ( int i = 0; i < selections.Count(); i++ )
-				{
-					if ( selections[i] == SELECTION_INTERACT )
-						return true;
-				}
 			}
 		}
 		

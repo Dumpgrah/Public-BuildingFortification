@@ -14,9 +14,7 @@ class BF_SlottedPlank extends ItemBase
 
 class BF_DoorBarricade extends BuildingFortficationsCore
 {
-	const int GATE_STATE_NONE 				= 0;
-	const int GATE_STATE_PARTIAL 			= 1;
-	const int GATE_STATE_FULL 				= 2;
+	
 	
 	const string ATTACHMENT_SLOT_COMBINATION_LOCK 	= "Att_CombinationLock";
 	const string ATTACHMENT_SLOT_CROSSBOARD 	    = "CrossBoard";
@@ -35,7 +33,6 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 	protected bool m_ToDiscard 				= false; //for legacy OnStoreLoad handling
 	protected bool m_IsOpened 				= false;
 	protected bool m_IsOpenedClient			= false;
-	protected int m_GateState 				= 0;
 	protected bool m_SoundRattle			= false;
 	protected int m_SoundRattleClient 		= -1;
 	
@@ -79,7 +76,7 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		return m_GateState > GATE_STATE_NONE;
 	}
 	
-	bool HasFullyConstructedGate()
+	override bool HasFullyConstructedGate()
 	{
 		return m_GateState == GATE_STATE_FULL;
 	}
@@ -186,6 +183,7 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		return "BF_DoorBarricadeKit";
 	}
 	
+	
 	override bool CanDisplayAttachmentSlot( string slot_name )
 	{
 		if (!super.CanDisplayAttachmentSlot(slot_name))
@@ -207,9 +205,6 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 			}
 			return false;
 		}
-		//if ( !GateAttachmentConditions(InventorySlots.GetSlotIdFromString(slot_name)) )
-		//	return false;
-		//
 		return true;
 	}
 	
@@ -248,14 +243,20 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 
 	override bool CanDisplayAttachmentCategory(string category_name) 
 	{	
-		if (category_name == "Base" && !HasBase())
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		if(IsPlayerInside(player,"") == true)
+		{
+			if (category_name == "Base" && !HasBase())
 			return true;
-		else if (category_name == "Material" && HasBase() && GetConstruction().IsPartConstructed("a_base") && !FullyConstructed())
+			else if (category_name == "Material" && HasBase() && GetConstruction().IsPartConstructed("b_start") && !FullyConstructed())
 			return true;
-		else if (category_name == "Material" && FullyConstructed() && HasMaterialAttachments())
+			else if (category_name == "Material" && FullyConstructed() && HasMaterialAttachments())
 			return true;
-		else if (category_name == "Attachments" && GetConstruction().IsPartConstructed("i_hindges"))
+			else if (category_name == "Attachments" && GetConstruction().IsPartConstructed("i_hindges"))
 			return true;
+		
+			return true;
+		}
 		else
 			return false;
     }

@@ -3,7 +3,7 @@ class ActionManageLockOnDoor : ActionManageLockOnFence
 {
 	
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        BF_DoorBarricade fence = BF_DoorBarricade.Cast(target.GetObject());
+        BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(target.GetObject());
         CodeLock codelock;
 
         if (fence && !fence.IsOpened()) {
@@ -41,7 +41,7 @@ class ActionManageLockOnDoor : ActionManageLockOnFence
     override void OnStartClient(ActionData action_data) {
         PlayerBase player = action_data.m_Player;
         PlayerIdentity identity = player.GetIdentity();
-        BF_DoorBarricade fence = BF_DoorBarricade.Cast(action_data.m_Target.GetObject());
+        BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(action_data.m_Target.GetObject());
         CodeLock codelock;
 
         if (fence) {
@@ -64,7 +64,7 @@ class ActionManageLockOnDoor : ActionManageLockOnFence
 class ActionAttachCodeLockToDoor : ActionAttachCodeLockToFence {
 	
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        BF_DoorBarricade fence = BF_DoorBarricade.Cast(target.GetObject());
+        BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(target.GetObject());
 
         if (fence) {
             if (!fence.HasFullyConstructedGate()) {
@@ -81,7 +81,7 @@ class ActionAttachCodeLockToDoor : ActionAttachCodeLockToFence {
     }
 
     override void OnExecuteClient(ActionData action_data) {
-        BF_DoorBarricade fence = BF_DoorBarricade.Cast(action_data.m_Target.GetObject());
+        BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
 
 		ClearInventoryReservationEx(action_data);
@@ -95,7 +95,7 @@ class ActionAttachCodeLockToDoor : ActionAttachCodeLockToFence {
     }
 
     override void OnExecuteServer(ActionData action_data) {
-        BF_DoorBarricade fence = BF_DoorBarricade.Cast(action_data.m_Target.GetObject());
+        BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(action_data.m_Target.GetObject());
         PlayerIdentity playerId = action_data.m_Player.GetIdentity();
 
         if (fence) {
@@ -105,10 +105,31 @@ class ActionAttachCodeLockToDoor : ActionAttachCodeLockToFence {
 }
 class ActionLockAdminOnBFDoor : ActionLockAdminOnFence 
 {
-
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) 
+	
+	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) 
 	{
-        BF_DoorBarricade DB = BF_DoorBarricade.Cast(target.GetObject());
+        BuildingFortficationsCore DB = BuildingFortficationsCore.Cast(target.GetObject());
+        CodeLock codelock;
+
+        if (DB && !DB.IsOpened()) {
+            codelock = CodeLock.Cast(DB.GetCodeLock());
+
+            if (codelock) {
+                if (codelock.GetLockState()) {
+                    if (GetCLPermissionManager().UserIsAdmin(player.GetIdentity().GetPlainId())) {
+                        lockState = "Admin Lock";
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    override void OnStartClient(ActionData action_data) {
+        PlayerBase player = action_data.m_Player;
+        PlayerIdentity identity = player.GetIdentity();
+        BuildingFortficationsCore DB = BuildingFortficationsCore.Cast(action_data.m_Target.GetObject());
         CodeLock codelock;
 
         if (DB) 
@@ -117,36 +138,11 @@ class ActionLockAdminOnBFDoor : ActionLockAdminOnFence
 
             if (codelock) 
 			{
-                if (codelock.GetLockState()) {
-                    if (GetCLPermissionManager().UserIsAdmin(player.GetIdentity().GetPlainId())) 
-					{
-                        lockState = "Admin Lock Testing";
-                        return true;
-                    }
-                }
-            }
-        }
-		lockState = "Admin Lock Testing";
-        return true;
-    }
-
-    override void OnStartClient(ActionData action_data) {
-        PlayerBase player = action_data.m_Player;
-        PlayerIdentity identity = player.GetIdentity();
-        BF_DoorBarricade fence = BF_DoorBarricade.Cast(action_data.m_Target.GetObject());
-        CodeLock codelock;
-
-        if (fence) 
-		{
-            codelock = CodeLock.Cast(fence.GetCodeLock());
-
-            if (codelock) 
-			{
                 if (codelock.GetLockState()) 
 				{
                     if (GetCLPermissionManager().UserIsAdmin()) 
 					{
-                        GetCLUIManager().ShowMenu(CLMENU.ADMIN_CODE_MENU, fence);
+                        GetCLUIManager().ShowMenu(CLMENU.ADMIN_CODE_MENU, DB);
                     }
                 }
             }
@@ -167,7 +163,7 @@ class ActionDestroyCodeLockOnBFDoor : ActionDestroyCodeLockOnFence
     }
 	
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        BF_DoorBarricade fence = BF_DoorBarricade.Cast(target.GetObject());
+        BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(target.GetObject());
         CodeLock codelock;
 
         _Health = 0;
@@ -188,7 +184,7 @@ class ActionDestroyCodeLockOnBFDoor : ActionDestroyCodeLockOnFence
     override void OnFinishProgressServer(ActionData action_data) {
         if (!GetDayZGame().GetCodeLockConfig().CanRaidGates()) { return; }
 
-        BF_DoorBarricade fence = BF_DoorBarricade.Cast(action_data.m_Target.GetObject());
+        BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(action_data.m_Target.GetObject());
         float raidIncrementAmount = _maxHealth / GetDayZGame().GetCodeLockConfig().GetIncrementAmount();
         int toolDamage = GetDayZGame().GetCodeLockConfig().GetToolDamageonRaid();
 

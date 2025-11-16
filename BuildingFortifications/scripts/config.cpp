@@ -88,7 +88,7 @@ class CfgVehicles
 	class Inventory_Base;
 	class BaseBuildingBase;
 	class HouseNoDestruct;
-	class BuildingFortficationsCore : BaseBuildingBase {};
+	class BuildingFortficationsCore : BaseBuildingBase{};
 
 	class BF_WindowBarricade: BuildingFortficationsCore
 	{
@@ -2977,7 +2977,7 @@ class CfgVehicles
 					name="$STR_BF_middleholders";
 					is_base = 0;
 					is_gate=0;
-					id=16;
+					id=18;
 					required_parts[]=
 					{
 						"a_base","b_lower_frame","b_upper_frame","i_hindges"
@@ -3046,6 +3046,1767 @@ class CfgVehicles
 			};
 		};
 	};	
+	
+	class BF_DoubleDoorBarricade: BuildingFortficationsCore
+	{
+		scope = 2;
+		displayName = "Double Door Barricade";
+		descriptionShort = "$STR_BF_bfsdafh";
+		model = "BuildingFortifications\Data\Double Door Barricade\double_door_barricade_core.p3d";
+		bounding = "BSphere";
+		overrideDrawArea = "3.0";
+		forceFarBubble = "true";
+		handheld = "false";
+		lootCategory = "Crafted";
+		carveNavmesh = 1;
+		weight = 10000;
+		itemSize[] = {2,3};
+		physLayer = "item_large";
+		createProxyPhysicsOnInit = "false";
+		createdProxiesOnInit[] = {"DEPLOYED"};
+		rotationFlags = 2;
+		expansionIsOpenable = 1;
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints=100;
+					healthLevels[]=
+					{
+						
+						{
+							1.0,
+							
+							{
+								""
+							}
+						},
+						
+						{
+							0.69999999,
+							
+							{
+								""
+							}
+						},
+						
+						{
+							0.5,
+							
+							{
+								""
+							}
+						},
+						
+						{
+							0.30000001,
+							
+							{
+								""
+							}
+						},
+						
+						{
+							0.0,
+							
+							{
+								""
+							}
+						}
+					};
+				};
+			};
+			class GlobalArmor
+			{
+				class FragGrenade
+				{
+					class Health
+					{
+						damage=0;
+					};
+					class Blood
+					{
+						damage=0;
+					};
+					class Shock
+					{
+						damage=0;
+					};
+				};
+			};
+			class DamageZones
+			{
+				class A_Base
+				{
+					class Health
+					{
+						hitpoints=100;
+						transferToGlobalCoef=0;
+						healthLevels[]=
+						{
+							
+							{
+								1.0,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.69999999,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.5,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.30000001,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.00009,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_destruct.rvmat"
+								}
+							}
+						};
+					};
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage=0.000001;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage=0.000001;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class FragGrenade
+						{
+							class Health
+							{
+								damage=0.000001;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+					};
+					displayName="Post";
+					componentNames[]=
+					{
+						"a_base"
+					};
+					fatalInjuryCoef=-1;
+				};
+				class B_LEFT_FRAMES
+				{
+					class Health
+					{
+						hitpoints=9000;
+						transferToGlobalCoef=0;
+						healthLevels[]=
+						{
+							
+							{
+								1.0,
+								
+								{
+									"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.69999999,
+								
+								{
+									"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.5,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.30000001,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.00009,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_destruct.rvmat"
+								}
+							}
+						};
+					};
+					displayName="left frames";
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage=1;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage=0.64999998;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class FragGrenade
+						{
+							class Health
+							{
+								damage=20;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+					};
+					componentNames[]=
+					{
+						"b_left_frames"
+					};
+					fatalInjuryCoef=-1;
+				};
+				class B_RIGHT_FRAMES: B_LEFT_FRAMES
+				{
+					displayName="Right frames";
+					componentNames[]=
+					{
+						"b_right_frames"
+					};
+				};
+				class C_LEFT_PLANKS
+				{
+					class Health
+					{
+						hitpoints=12000;
+						transferToGlobalCoef=0;
+						healthLevels[]=
+						{
+							
+							{
+								1.0,
+								
+								{
+									"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.69999999,
+								
+								{
+									"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.5,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.30000001,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.00009,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_destruct.rvmat"
+								}
+							}
+						};
+					};
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage=1;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage=0.64999998;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class FragGrenade
+						{
+							class Health
+							{
+								damage=35;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+					};
+					displayName="Left planks";
+					componentNames[]=
+					{
+						"c_left_planks"
+					};
+				};
+				class C_RIGHT_PLANKS: C_LEFT_PLANKS
+				{
+					displayName="Right planks";
+					componentNames[]=
+					{
+						"c_right_planks"
+					};
+				};
+				class D_LEFT_FINAL_PLANKS: C_LEFT_PLANKS
+				{
+					displayName="Left final planks";
+					componentNames[]=
+					{
+						"d_left_final_planks"
+					};
+				};
+				class D_RIGHT_FINAL_PLANKS: C_LEFT_PLANKS
+				{
+					displayName="Right final planks";
+					componentNames[]=
+					{
+						"d_right_final_planks"
+					};
+				};
+				class E_LEFT_OUTER_PLATE
+				{
+					class Health
+					{
+						hitpoints=15750;
+						transferToGlobalCoef=0;
+						healthLevels[]=
+						{
+							
+							{
+								1.0,
+								
+								{
+									"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.69999999,
+								
+								{
+									"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.5,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.30000001,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.00009,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_destruct.rvmat"
+								}
+							}
+						};
+					};
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage=1;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage=0.64999998;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class FragGrenade
+						{
+							class Health
+							{
+								damage=35;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+					};
+					displayName="Left outer plate";
+					componentNames[]=
+					{
+						"e_left_outer_plate"
+					};
+				};
+				class E_RIGHT_OUTER_PLATE: E_LEFT_OUTER_PLATE
+				{
+					displayName="Right outer plate";
+					componentNames[]=
+					{
+						"e_right_outer_plate"
+					};
+				};
+				class F_LEFT_INNER_PLANKS: C_LEFT_PLANKS
+				{
+					displayName="Left inner planks";
+					componentNames[]=
+					{
+						"f_left_inner_planks"
+					};
+				};
+				class F_RIGHT_INNER_PLANKS: C_LEFT_PLANKS
+				{
+					displayName="Right inner planks";
+					componentNames[]=
+					{
+						"f_right_inner_planks"
+					};
+				};
+				class G_LEFT_INNER_PLATE: E_LEFT_OUTER_PLATE
+				{
+					displayName="Left inner plate";
+					componentNames[]=
+					{
+						"g_left_inner_plate"
+					};
+				};
+				class G_RIGHT_INNER_PLATE: E_LEFT_OUTER_PLATE
+				{
+					displayName="Right inner plate";
+					componentNames[]=
+					{
+						"g_right_inner_plate"
+					};
+				};
+				class H_HINDGES: B_LEFT_FRAMES
+				{
+					displayName="Hindges";
+					componentNames[]=
+					{
+						"h_hindges"
+					};
+				};
+			};
+		};
+		attachments[]=
+		{
+			"Att_CombinationLock",
+			"Material_Nails",
+			"Material_WoodenPlanks",
+			"Material_MetalSheets",
+			"Material_WoodenLogs",
+			"Material_MetalWire",
+			"Material_Shelter_Sticks"
+		};
+		class GUIInventoryAttachmentsProps
+		{
+			class Base
+			{
+				name="$STR_CfgVehicles_Fence_Att_Category_Base";
+				description="";
+				attachmentSlots[]=
+				{
+					"Material_WoodenLogs"
+				};
+				icon="set:BuildingFortIcons image:PostsPLusFrame";
+				selection="wall";
+			};
+			class Attachments
+			{
+				name="$STR_CfgVehicles_Fence_Att_Category_Attachments";
+				description="";
+				attachmentSlots[]=
+				{
+					"Att_CombinationLock"
+				};
+				icon="set:BuildingFortIcons image:cat_bb_attachments";
+				selection="wall";
+			};
+			class Material
+			{
+				name="$STR_CfgVehicles_Fence_Att_Category_Materials";
+				description="";
+				attachmentSlots[]=
+				{
+					"Material_Nails",
+					"Material_WoodenPlanks",
+					"Material_MetalSheets",
+					"Material_MetalWire",
+					"Material_Shelter_Sticks"
+				};
+				icon="set:BuildingFortIcons image:BuildBarricadeDoor";
+				selection="wall";
+			};
+		};
+		class AnimationSources
+		{
+			class AnimSourceShown
+			{
+				source="user";
+				animPeriod=0.0099999998;
+				initPhase=0;
+			};
+			class AnimSourceHidden
+			{
+				source="user";
+				animPeriod=0.0099999998;
+				initPhase=1;
+			};
+			class AnimRotate
+			{
+				source="user";
+				animPeriod=0.017999999;
+				initPhase=0;
+			};
+			class DEPLOYED: AnimSourceHidden
+			{};
+			class A_BASE: AnimSourceHidden
+			{};
+			class B_LEFT_FRAMES: AnimSourceHidden
+			{};
+			class B_RIGHT_FRAMES: AnimSourceHidden
+			{};
+			class C_LEFT_PLANKS: AnimSourceHidden
+			{};
+			class C_RIGHT_PLANKS: AnimSourceHidden
+			{};
+			class D_LEFT_FINAL_PLANKS: AnimSourceHidden
+			{};
+			class D_RIGHT_FINAL_PLANKS: AnimSourceHidden
+			{};
+			class E_LEFT_OUTER_PLATE: AnimSourceHidden
+			{};
+			class E_RIGHT_OUTER_PLATE: AnimSourceHidden
+			{};
+			class F_LEFT_INNER_PLANKS: AnimSourceHidden
+			{};
+			class F_RIGHT_INNER_PLANKS: AnimSourceHidden
+			{};
+			class G_LEFT_INNER_PLATE: AnimSourceHidden
+			{};
+			class G_RIGHT_INNER_PLATE: AnimSourceHidden
+			{};
+			class H_HINDGES: AnimSourceHidden
+			{};
+			
+			class LEFT_FRAME_ROTATE: AnimRotate
+			{};
+			class LEFT_PLANKS_ROTATE: AnimRotate
+			{};
+			class LEFT_FINAL_PLANKS_ROTATE: AnimRotate
+			{};
+			class LEFT_OUTER_PLATE_ROTATE: AnimRotate
+			{};
+			class LEFT_INNER_PLANKS_ROTATE: AnimRotate
+			{};
+			class LEFT_INNER_PLATE_ROTATE: AnimRotate
+			{};
+			class RIGHT_FRAME_ROTATE: AnimRotate
+			{};
+			class RIGHT_PLANKS_ROTATE: AnimRotate
+			{};
+			class RIGHT_FINAL_PLANKS_ROTATE: AnimRotate
+			{};
+			class RIGHT_OUTER_PLATE_ROTATE: AnimRotate
+			{};
+			class RIGHT_INNER_PLANKS_ROTATE: AnimRotate
+			{};
+			class RIGHT_INNER_PLATE_ROTATE: AnimRotate
+			{};
+			class ATT_COMBINATIONLOCK: AnimRotate
+			{};
+		};
+		class Construction
+		{
+			class wall
+			{
+				class a_base
+				{
+					name="Base";
+					is_base=1;
+					id=1;
+					required_parts[]={};
+					conflicted_parts[]={};
+					collision_data[]={};
+					build_action_type=4;
+					dismantle_action_type=4;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenLog";
+							slot_name="Material_WoodenLogs";
+							quantity=2;
+							lockable=1;
+						};
+					};
+				};
+				class b_left_frames
+				{
+					name="Left frame";
+					is_base = 0;
+					is_gate=0;
+					id=2;
+					required_parts[]=
+					{
+						"a_base"
+					};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenStick";
+							slot_name="Material_Shelter_Sticks";
+							quantity=10;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=8;
+						};
+					};
+				};
+				class b_right_frames
+				{
+					name="Right frame";
+					is_base = 0;
+					is_gate=0;
+					id=4;
+					required_parts[]=
+					{
+						"a_base"
+					};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenStick";
+							slot_name="Material_Shelter_Sticks";
+							quantity=10;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=8;
+						};
+					};
+				};
+				class c_left_planks
+				{
+					name="Left planks";
+					is_base = 0;
+					is_gate=0;
+					id=6;
+					required_parts[]=
+					{"b_left_frames"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenPlank";
+							slot_name="Material_WoodenPlanks";
+							quantity=10;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=16;
+						};
+					};
+				};
+				class c_right_planks
+				{
+					name="Right planks";
+					is_base = 0;
+					is_gate=0;
+					id=8;
+					required_parts[]=
+					{"b_right_frames"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenPlank";
+							slot_name="Material_WoodenPlanks";
+							quantity=10;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=16;
+						};
+					};
+				};
+				class d_left_final_planks
+				{
+					name="Left final planks";
+					is_base = 0;
+					is_gate=0;
+					id=10;
+					required_parts[]=
+					{"c_left_planks"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenPlank";
+							slot_name="Material_WoodenPlanks";
+							quantity=8;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=12;
+						};
+					};
+				};
+				class d_right_final_planks
+				{
+					name="Right final planks";
+					is_base = 0;
+					is_gate=0;
+					id=12;
+					required_parts[]=
+					{"c_right_planks"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenPlank";
+							slot_name="Material_WoodenPlanks";
+							quantity=8;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=12;
+						};
+					};
+				};
+				class e_left_outer_plate
+				{
+					name="Left outer plate";
+					is_base = 0;
+					is_gate=0;
+					id=14;
+					required_parts[]=
+					{"d_left_final_planks"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="MetalPlate";
+							slot_name="Material_MetalSheets";
+							quantity=2;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=12;
+						};
+					};
+				};
+				class e_right_outer_plate
+				{
+					name="Right outer plate";
+					is_base = 0;
+					is_gate=0;
+					id=16;
+					required_parts[]=
+					{"d_right_final_planks"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="MetalPlate";
+							slot_name="Material_MetalSheets";
+							quantity=2;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=12;
+						};
+					};
+				};
+				class f_left_inner_planks
+				{
+					name="Left inner planks";
+					is_base = 0;
+					is_gate=0;
+					id=18;
+					required_parts[]=
+					{"b_left_frames"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenPlank";
+							slot_name="Material_WoodenPlanks";
+							quantity=10;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=10;
+						};
+					};
+				};
+				class f_right_inner_planks
+				{
+					name="Right inner planks";
+					is_base = 0;
+					is_gate=0;
+					id=20;
+					required_parts[]=
+					{"b_right_frames"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenPlank";
+							slot_name="Material_WoodenPlanks";
+							quantity=10;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=10;
+						};
+					};
+				};
+				class g_left_inner_plate
+				{
+					name="Left inner plate";
+					is_base = 0;
+					is_gate=0;
+					id=22;
+					required_parts[]=
+					{"f_left_inner_planks"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="MetalPlate";
+							slot_name="Material_MetalSheets";
+							quantity=2;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=10;
+						};
+					};
+				};
+				class g_right_inner_plate
+				{
+					name="Right inner plate";
+					is_base = 0;
+					is_gate=0;
+					id=24;
+					required_parts[]=
+					{"f_right_inner_planks"};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="MetalPlate";
+							slot_name="Material_MetalSheets";
+							quantity=2;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=10;
+						};
+					};
+				};
+				class h_hindges
+				{
+					name="Hindges";
+					is_base = 0;
+					is_gate=1;
+					id=26;
+					required_parts[]=
+					{
+						"a_base"
+					};
+					collision_data[]={};
+					build_action_type=1;
+					dismantle_action_type=1;
+					material_type=5;
+					class Materials
+					{
+						class Material1
+						{
+							type="MetalWire";
+							slot_name="Material_MetalWire";
+							quantity=-1;
+							lockable=1;
+						};
+					};
+				};
+			};
+		};
+	};	
+	class BF_DoubleDoorBarricadeKit: BF_DoorBarricadeKit
+	{
+		scope=2;
+		displayName="Double Door Kit";
+		descriptionShort="Double Door Barricade Kit";
+		model = "BuildingFortifications\Data\Double Door Barricade\double_door_barricade_kit.p3d";
+		weight=300;
+		rotationFlags=17;
+		itemSize[]={1,4};
+		itemBehaviour=1;
+		attachments[]=
+		{
+			"Rope"
+		};
+		class AnimationSources
+		{
+			class AnimSourceShown
+			{
+				source="user";
+				animPeriod=0.0099999998;
+				initPhase=0;
+			};
+			class AnimSourceHidden
+			{
+				source="user";
+				animPeriod=0.0099999998;
+				initPhase=1;
+			};
+			class Inventory: AnimSourceShown
+			{
+			};
+			class Placing: AnimSourceHidden
+			{
+			};
+		};
+	};	
+	
+	/* class BF_DoublePunjiBoard: BuildingFortficationsCore
+	{
+		scope = 2;
+		displayName = "Double Punji Sticks";
+		descriptionShort = "";
+		model = "BuildingFortifications\Data\Punji_Sticks\Punji_Sticks.p3d";
+		bounding = "BSphere";
+		overrideDrawArea = "3.0";
+		forceFarBubble = "true";
+		handheld = "false";
+		lootCategory = "Crafted";
+		carveNavmesh = 1;
+		weight = 10000;
+		itemSize[] = {2,3};
+		physLayer = "item_large";
+		createProxyPhysicsOnInit = "false";
+		createdProxiesOnInit[] = {"deployed"};
+		rotationFlags = 2;
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints=100;
+					healthLevels[]=
+					{
+						
+						{
+							1.0,
+							
+							{
+								""
+							}
+						},
+						
+						{
+							0.69999999,
+							
+							{
+								""
+							}
+						},
+						
+						{
+							0.5,
+							
+							{
+								""
+							}
+						},
+						
+						{
+							0.30000001,
+							
+							{
+								""
+							}
+						},
+						
+						{
+							0.0,
+							
+							{
+								""
+							}
+						}
+					};
+				};
+			};
+			class GlobalArmor
+			{
+				class FragGrenade
+				{
+					class Health
+					{
+						damage=0;
+					};
+					class Blood
+					{
+						damage=0;
+					};
+					class Shock
+					{
+						damage=0;
+					};
+				};
+			};
+			class DamageZones
+			{
+				class A_LEFT_BOARD
+				{
+					class Health
+					{
+						hitpoints=200;
+						transferToGlobalCoef=0;
+						healthLevels[]=
+						{
+							
+							{
+								1.0,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.69999999,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.5,
+								
+								{
+									////"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.30000001,
+								
+								{
+									////"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.0,
+								
+								{
+									////"DZ\gear\camping\data\fence_pile_of_planks_destruct.rvmat"
+								}
+							}
+						};
+					};
+					displayName="Left Board";
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage=0.25;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage=1;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class FragGrenade
+						{
+							class Health
+							{
+								damage=0.25;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+					};
+					componentNames[]=
+					{
+						"a_left_board"
+					};
+					fatalInjuryCoef=-1;
+				};
+				class A_LEFT_PUNJI_STICKS
+				{
+					class Health
+					{
+						hitpoints=400;
+						transferToGlobalCoef=0;
+						healthLevels[]=
+						{
+							
+							{
+								1.0,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.69999999,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.5,
+								
+								{
+									////"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.30000001,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.00009,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_destruct.rvmat"
+								}
+							}
+						};
+					};
+					displayName="Left Punji Sticks";
+					class ArmorType
+					{
+						class Projectile
+						{
+							class Health
+							{
+								damage=1;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class Melee
+						{
+							class Health
+							{
+								damage=0.64999998;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+						class FragGrenade
+						{
+							class Health
+							{
+								damage=50;
+							};
+							class Blood
+							{
+								damage=0;
+							};
+							class Shock
+							{
+								damage=0;
+							};
+						};
+					};
+					componentNames[]=
+					{
+						"a_left_punji_sticks"
+					};
+					fatalInjuryCoef=-1;
+				};
+				class B_RIGHT_BOARD: A_LEFT_BOARD
+				{
+					displayName="Right Board";
+					componentNames[]=
+					{
+						"b_right_board"
+					};
+				};
+				class B_RIGHT_PUNJI_STICKS: A_LEFT_PUNJI_STICKS
+				{
+					displayName="Right Punji Sticks";
+					class Health
+					{
+						hitpoints=10;
+						transferToGlobalCoef=0;
+						healthLevels[]=
+						{
+							
+							{
+								1.0,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.69999999,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks.rvmat"
+								}
+							},
+							
+							{
+								0.5,
+								
+								{
+									////"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.30000001,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_damage.rvmat"
+								}
+							},
+							
+							{
+								0.00009,
+								
+								{
+									//"DZ\gear\camping\data\fence_pile_of_planks_destruct.rvmat"
+								}
+							}
+						};
+					};
+					componentNames[]=
+					{
+						"b_right_punji_sticks"
+					};
+				};
+			};
+		};
+		attachments[]=
+		{
+			"Material_Nails",
+			"Material_WoodenPlanks",
+			"Material_Shelter_Sticks"
+		};
+		class GUIInventoryAttachmentsProps
+		{
+			class Material
+			{
+				name="$STR_CfgVehicles_Fence_Att_Category_Materials";
+				description="";
+				attachmentSlots[]=
+				{
+					"Material_Nails",
+					"Material_WoodenPlanks",
+					"Material_Shelter_Sticks"
+				};
+				icon="";
+				selection="wall";
+			};
+		};
+		class AnimationSources
+		{
+			class AnimSourceShown
+			{
+				source="user";
+				animPeriod=0.0099999998;
+				initPhase=0;
+			};
+			class AnimSourceHidden
+			{
+				source="user";
+				animPeriod=0.0099999998;
+				initPhase=1;
+			};
+			class AnimRotate
+			{
+				source="user";
+				animPeriod=0.017999999;
+				initPhase=0;
+			};
+			class Deployed: AnimSourceHidden
+			{};
+			class A_LEFT_BOARD: AnimSourceHidden
+			{};
+			class A_LEFT_PUNJI_STICKS: AnimSourceHidden
+			{};
+			class B_RIGHT_BOARD: AnimSourceHidden
+			{};
+			class B_RIGHT_PUNJI_STICKS:AnimSourceHidden
+			{};
+		};
+		class Construction
+		{
+			class wall
+			{
+				class a_left_board
+				{
+					name="Left Board";
+					is_base=1;
+					id=1;
+					required_parts[]={};
+					conflicted_parts[]={};
+					collision_data[]={};
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenPlank";
+							slot_name="Material_WoodenPlanks";
+							quantity=1;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=4;
+						};
+					};
+				};
+				class a_left_punji_sticks
+				{
+					name="Left Punji Sticks";
+					is_base = 0;
+					is_gate=0;
+					id=2;
+					required_parts[]=
+					{
+						"a_left_board"
+					};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenStick";
+							slot_name="Material_Shelter_Sticks";
+							quantity=5;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=5;
+						};
+					};
+				};
+				class b_right_board
+				{
+					name="Right Board";
+					is_base=1;
+					id=3;
+					required_parts[]={};
+					conflicted_parts[]={};
+					collision_data[]={};
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenPlank";
+							slot_name="Material_WoodenPlanks";
+							quantity=1;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=4;
+						};
+					};
+				};
+				class b_right_punji_sticks
+				{
+					name="Right Punji Sticks";
+					is_base = 0;
+					is_gate=0;
+					id=2;
+					required_parts[]=
+					{
+						"b_right_board"
+					};
+					conflicted_parts[]={};
+                    collision_data[]=
+                    {
+                        "wall_min",
+                        "wall_max"
+                    };
+					build_action_type=2;
+					dismantle_action_type=2;
+					material_type=2;
+					class Materials
+					{
+						class Material1
+						{
+							type="WoodenStick";
+							slot_name="Material_Shelter_Sticks";
+							quantity=5;
+						};
+						class Material2
+						{
+							type="Nail";
+							slot_name="Material_Nails";
+							quantity=5;
+						};
+					};
+				};
+			};
+		};
+	};	 */
 	
 	
 	class BurlapCurtain: Inventory_Base

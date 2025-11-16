@@ -1,8 +1,6 @@
 class BF_WindowBarricade extends BuildingFortficationsCore
 {
-	const int GATE_STATE_NONE = 0;
-	const int GATE_STATE_PARTIAL = 1;
-	const int GATE_STATE_FULL = 2;
+
 	
 	const string SOUND_GATE_OPEN_START = "DoorWoodTowerOpen_SoundSet";
 	const string SOUND_GATE_CLOSE_START	= "DoorWoodTowerClose_start_SoundSet";
@@ -18,7 +16,7 @@ class BF_WindowBarricade extends BuildingFortficationsCore
 	protected bool m_ToDiscard = false; //for legacy OnStoreLoad handling
 	protected bool m_IsOpened = false;
 	protected bool m_IsOpenedClient	= false;
-	protected int m_GateState = 0;
+	//protected int m_GateState = 0;
 	protected bool m_SoundRattle = false;
 	protected int m_SoundRattleClient = -1;
 	
@@ -71,7 +69,7 @@ class BF_WindowBarricade extends BuildingFortficationsCore
 		return m_GateState > GATE_STATE_NONE;
 	}
 	
-	bool HasFullyConstructedGate()
+	override bool HasFullyConstructedGate()
 	{
 		return m_GateState == GATE_STATE_FULL;
 	}
@@ -525,32 +523,132 @@ class BF_WindowBarricade extends BuildingFortficationsCore
 		AddAction(ActionOpenBuildingCore);
 		AddAction(ActionCloseBuildingCore);		
 	}
-
-	override bool CheckMemoryPointVerticalDistance(float max_dist, string selection, PlayerBase player)
+	override bool IsFacingPlayer( PlayerBase player, string selection )
 	{
-		max_dist = 5;
+		vector ref_pos;
+		vector ref_dir;
+		vector player_dir;
+		float dot;
+		bool has_memory_point = MemoryPointExists( selection );
 		
-		if (player)
+		if ( has_memory_point )
 		{
-			//check vertical distance
-			vector player_pos = player.GetPosition();
-			vector pos;
-			
-			if (MemoryPointExists(selection))
-			{
-				pos = ModelToWorld(GetMemoryPointPos(selection));
-			}
-			
-			if (Math.AbsFloat(player_pos[1] - pos[1]) <= max_dist)
+			ref_pos = ModelToWorld( GetMemoryPointPos( selection ) );
+			ref_dir = ref_pos - GetPosition();
+		}
+		else
+		{
+			ref_pos = GetPosition();
+			ref_dir = ref_pos - player.GetPosition();
+		}
+		
+		ref_dir.Normalize();
+		ref_dir[1] = 0;				//ignore height
+		
+		player_dir = player.GetDirection();
+		player_dir.Normalize();
+		player_dir[1] = 0;			//ignore height
+		
+		if ( ref_dir.Length() != 0 )
+		{
+			dot = vector.Dot( player_dir, ref_dir );
+		}
+		
+		if ( has_memory_point )
+		{
+			if ( dot < 0 && Math.AbsFloat( dot ) > MIN_ACTION_DETECTION_ANGLE_RAD )
 			{
 				return true;
 			}
-			else
+		}
+		else
+		{
+			if ( dot > 0 && Math.AbsFloat( dot ) > MIN_ACTION_DETECTION_ANGLE_RAD )
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+		
+	override bool IsFacingCamera( string selection )
+	{
+		vector ref_pos;
+		vector ref_dir;
+		vector cam_dir = GetGame().GetCurrentCameraDirection();
+		
+		if ( MemoryPointExists( selection ) )
+		{
+			ref_pos = ModelToWorld( GetMemoryPointPos( selection ) );
+			ref_dir = ref_pos - GetPosition();
+			
+			ref_dir.Normalize();
+			ref_dir[1] = 0;		//ignore height
+			
+			cam_dir[1] = 0;		//ignore height
+			
+			if ( ref_dir.Length() > 0.5 )		//if the distance (m) is too low, ignore this check
+			{
+				float dot = vector.Dot( cam_dir, ref_dir );
+			
+				if ( dot < 0 )	
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+	
+	override bool IsPlayerInside( PlayerBase player, string selection )
+	{
+
+		vector player_pos = player.GetPosition();
+		vector tower_pos = GetPosition();
+		vector ref_dir = GetDirection();
+		ref_dir[1] = 0;
+		ref_dir.Normalize();
+		
+		vector min,max;
+		
+		min = -GetMemoryPointPos( "interact_min" );
+		max = -GetMemoryPointPos( "interact_max" );
+		
+		vector dir_to_tower = tower_pos - player_pos;
+		dir_to_tower[1] = 0;
+		float len = dir_to_tower.Length();
+		
+
+		dir_to_tower.Normalize();
+		
+		vector ref_dir_angle = ref_dir.VectorToAngles();
+		vector dir_to_tower_angle = dir_to_tower.VectorToAngles();
+		vector test_angles = dir_to_tower_angle - ref_dir_angle;
+		
+		vector test_position = test_angles.AnglesToVector() * len;
+		
+		if (test_position[0] > max[0] || test_position[0] < min[0] || test_position[2] > max[2] || test_position[2] < min[2] )
+		{
+			return false;
+		}
+
+		return true;
+	}
+	
+	override bool HasProperDistance( string selection, PlayerBase player )
+	{
+		if ( MemoryPointExists( selection ) )
+		{
+			vector selection_pos = ModelToWorld( GetMemoryPointPos( selection ) );
+			float distance = vector.Distance( selection_pos, player.GetPosition() );
+			if ( distance >= 1 )
 			{
 				return false;
 			}
-		}			
-
+		}
+			
 		return true;
-	}	
+	}
 };

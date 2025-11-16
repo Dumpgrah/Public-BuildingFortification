@@ -6,6 +6,7 @@ modded class PluginRecipesManager
 		RegisterRecipe(new CraftWindowBarricadekit);
 		RegisterRecipe(new CraftWindowBarricadeMedkit);
 		RegisterRecipe(new CraftDoorBarricadekit);
+		RegisterRecipe(new CraftDoubleDoorBarricadekit);
 		RegisterRecipe(new CraftBurlapCurtain);	
 		RegisterRecipe(new BF_CraftSlottedPlank);			
     }

@@ -85,7 +85,67 @@ class BF_WindowBarricadeMed extends BuildingFortficationsCore
 		else
 			return false;
     }
+	override bool CheckMemoryPointVerticalDistance(float max_dist, string selection, PlayerBase player)
+	{
+		max_dist = 5;
+		
+		if (player)
+		{
+			//check vertical distance
+			vector player_pos = player.GetPosition();
+			vector pos;
+			
+			if (MemoryPointExists(selection))
+			{
+				pos = ModelToWorld(GetMemoryPointPos(selection));
+			}
+			
+			if (Math.AbsFloat(player_pos[1] - pos[1]) <= max_dist)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}			
 
+		return true;
+	}
+	override bool IsPlayerInside( PlayerBase player, string selection )
+	{
+
+		vector player_pos = player.GetPosition();
+		vector tower_pos = GetPosition();
+		vector ref_dir = GetDirection();
+		ref_dir[1] = 0;
+		ref_dir.Normalize();
+		
+		vector min,max;
+		
+		min = -GetMemoryPointPos( "interact_min" );
+		max = -GetMemoryPointPos( "interact_max" );
+		
+		vector dir_to_tower = tower_pos - player_pos;
+		dir_to_tower[1] = 0;
+		float len = dir_to_tower.Length();
+		
+
+		dir_to_tower.Normalize();
+		
+		vector ref_dir_angle = ref_dir.VectorToAngles();
+		vector dir_to_tower_angle = dir_to_tower.VectorToAngles();
+		vector test_angles = dir_to_tower_angle - ref_dir_angle;
+		
+		vector test_position = test_angles.AnglesToVector() * len;
+		
+		if (test_position[0] > max[0] || test_position[0] < min[0] || test_position[2] > max[2] || test_position[2] < min[2] )
+		{
+			return false;
+		}
+
+		return true;
+	}
 	override void OnStoreSave(ParamsWriteContext ctx)
 	{   
 		super.OnStoreSave(ctx);

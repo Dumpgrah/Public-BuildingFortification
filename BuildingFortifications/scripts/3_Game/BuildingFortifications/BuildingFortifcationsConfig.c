@@ -1,7 +1,7 @@
 
 class BuildingFortificationsConfigBase
 {
-	string ConfigVersion = "6";
+	string ConfigVersion = "7";
 }
 
 class BuildingFortificationsConfig_V5: BuildingFortificationsConfigBase
@@ -25,11 +25,11 @@ class BuildingFortificationsConfig_V5: BuildingFortificationsConfigBase
 
 class BuildingFortificationsConfig: BuildingFortificationsConfig_V5
 {
-	protected static string VERSION = "6";
+	protected static string VERSION = "7";
 	protected static string DirPATH = "$profile:BuildingFortifications";
 	protected static string ProfileFolder = DirPATH + "\\Fortifications Settings.json";
 
-	//! New in version 6
+	//! New in version 7
 	bool UseCustomMaterialsList = true;
 	ref array<ref BFConstructionData> ConstructionMaterials = new array<ref BFConstructionData>;
 
@@ -55,7 +55,7 @@ class BuildingFortificationsConfig: BuildingFortificationsConfig_V5
 				bfConfig = new BuildingFortificationsConfig();
 				bfConfig.CopyFromConfig(dataV5); //! Copy over old settings to current instance
 
-				if (dataV5.ConfigVersion.ToInt() < 6)
+				if (dataV5.ConfigVersion.ToInt() < 7)
 				{
 					bfConfig.UseCustomMaterialsList = true;
 					bfConfig.GenerateDefaultConstructionMaterials();
@@ -112,7 +112,7 @@ class BuildingFortificationsConfig: BuildingFortificationsConfig_V5
 
 	void GenerateDefaultConstructionMaterials()
 	{
-		TStringArray bfObjects = {"BF_WindowBarricade", "BF_WindowBarricadeMed" , "BF_DoorBarricade"};
+		TStringArray bfObjects = {"BF_WindowBarricade", "BF_WindowBarricadeMed" , "BF_DoorBarricade","BF_DoubleDoorBarricade"};
 		
 		if (ConstructionMaterials && ConstructionMaterials.Count())
 			ConstructionMaterials.Clear();

@@ -2,7 +2,6 @@ class ActionOpenBuildingCore: ActionInteractBase
 {
 	protected string LockState = "#open";
 	ref NoiseParams m_NoisePar;
-	const string SELECTION_INTERACT = "door_interact";
 	
 	void ActionOpenBuildingCore()
 	{
@@ -53,14 +52,7 @@ class ActionOpenBuildingCore: ActionInteractBase
 	               	LockState = "#open";
 				}
 				#endif
-				array<string> selections = new array<string>;
-				targetObject.GetActionComponentNameList(target.GetComponentIndex(), selections);
-				
-				for ( int i = 0; i < selections.Count(); i++ )
-				{
-					if ( selections[i] == SELECTION_INTERACT )
-						return true;
-				}
+				return true;
 			}
 
 		}

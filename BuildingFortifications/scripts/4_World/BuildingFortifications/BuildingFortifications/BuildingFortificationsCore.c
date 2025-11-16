@@ -5,60 +5,81 @@ class BuildingFortficationsCore extends BaseBuildingBase
 	const float MAX_ACTION_DETECTION_DISTANCE 		= 2.0;		//meters
 	const float MAX_ACTION_DETECTION_ANGLE_RAD 		= 1.3;		//1.3 RAD = ~75 DEG
 	
-	override string GetInvulnerabilityTypeString()
-	{
-		return "disableBaseDamage";
-	}
-
+	protected int m_GateState 				= 0;
+	const int GATE_STATE_NONE 				= 0;
+	const int GATE_STATE_PARTIAL 			= 1;
+	const int GATE_STATE_FULL 				= 2;
+	
 	float GetDmgPercentage(int damageType)
 	{		
 		return 1.0;
 	}	
 	
-	override bool EEOnDamageCalculated(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef)
+	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef)
 	{
-		if (!super.EEOnDamageCalculated(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef)) {
-			return false;
-		}
+		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 		
-		float dmg_percent = GetDmgPercentage(damageType);
-		if (dmg_percent >= 1.0) {
-			return true;	
-		}		
-		
-		float damage_health_applied = damageResult.GetDamage(dmgZone, "Health");
-		damage_health_applied *= dmg_percent;
-		
-		int disable_dmg = GetBuildingFortificationsConfig().Disable_Base_Damage;
-		if (disable_dmg) {
-			return false;
-		}
-
-		int logging = GetBuildingFortificationsConfig().Enable_Destroy_Logs;
-		if (logging && source && damage_health_applied > 0) {
-			Man source_player = Man.Cast(source);
-			if (!source_player) {
-				source_player = Man.Cast(source.GetHierarchyRootPlayer());
-			}
-			
-			string log_string;
-			if (source_player) 
+		int DisableDmg = GetBuildingFortificationsConfig().Disable_Base_Damage;
+		//Print(DisableDmg);
+		if (GetGame().IsServer() && DisableDmg < 1)
+		{
+			PlayerBase player;
+			string tool = "";
+			float distance = 0;		
+			if (source)
 			{
-				log_string += string.Format("[%1, guid=%2] distance=%3m source=%4 to %5", source_player.GetIdentity().GetName(), source_player.GetIdentity().GetId(), vector.Distance(source.GetPosition(), GetPosition()), source.GetDisplayName(), GetDisplayName());
-			} else {
-				log_string += string.Format("distance=%1m source=%2 to %3", vector.Distance(source.GetPosition(), GetPosition()), source.GetDisplayName(), GetDisplayName());
-			}
+				distance = vector.Distance(this.GetPosition(), source.GetPosition());
+				tool = source.GetType();
+				player = PlayerBase.Cast(source.GetHierarchyRootPlayer());
 			
-			log_string += string.Format("\n\tdmg=%1, zone=%2, health=%3, pos=%4", damage_health_applied, dmgZone, GetHealth(dmgZone, "Health") - damage_health_applied, GetPosition());
-			GetGame().AdminLog(log_string);
-		}
-		// Apply our damage manually
-		SetHealth(dmgZone, "Health", GetHealth(dmgZone, "Health") - damage_health_applied);		
-		
-		// return false to not apply damage via engine code
-		return false;
-	}
+				array<string> FullZonesList = new array<string>;
+				GetDamageZones(FullZonesList);
+				int i;
+				for (i = 0; i < FullZonesList.Count(); i++)
 	
+				float zoneDmg = damageResult.GetDamage(FullZonesList.Get(i), "Health");
+				string zoneName = FullZonesList.Get(i);
+				float beforeHealth = GetHealth(zoneName, "Health");
+				if (zoneDmg > 0)
+				{
+					float HealBackAmount = zoneDmg - (zoneDmg * GetDmgPercentage(damageType));
+					
+					float resultingDamage = zoneDmg;
+					if (HealBackAmount > 0 && beforeHealth >= 10)
+					{
+						if (HealBackAmount > zoneDmg)
+						{
+							HealBackAmount = zoneDmg;
+						}
+						AddHealth(zoneName, "Health", HealBackAmount);
+						resultingDamage = zoneDmg - HealBackAmount;
+					}
+
+					int EnableLogging = GetBuildingFortificationsConfig().Enable_Destroy_Logs;
+					if(EnableLogging >= 1)
+					{
+						string FirstHalf = player.GetIdentity().GetName() + " (GUID: " +  player.GetIdentity().GetId() + ")" + " Shot From: " + distance + "m" + " with Weapon =: "+ source.GetDisplayName() + " at " + this.GetDisplayName();
+						string SecondHalf = " Damage Done: " + resultingDamage + " To Zone Part: " + zoneName + "  Current Health: " + GetHealth(zoneName, "Health") + " at Postion: " + this.GetPosition();
+						if (resultingDamage > 0)
+						{
+							if (player && player.GetIdentity())
+							{
+								GetGame().AdminLog(FirstHalf + SecondHalf);
+							}
+							else
+							{
+								GetGame().AdminLog(FirstHalf + SecondHalf);
+							}
+						}	
+					}
+				}
+			}
+		}
+	}
+	bool HasFullyConstructedGate()
+	{
+		return m_GateState == GATE_STATE_FULL;
+	}
 	
 	override ItemBase FoldBaseBuildingObject()
 	{
