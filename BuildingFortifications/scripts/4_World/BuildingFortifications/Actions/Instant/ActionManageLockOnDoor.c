@@ -15,7 +15,7 @@ class ActionManageLockOnDoor : ActionManageLockOnFence
                     return false;
                 }
             }
-            codelock = CodeLock.Cast(fence.GetCodeLock());
+            codelock = CodeLock.Cast(fence.GetCodeLockRS());
 
             if (codelock) 
 			{
@@ -45,7 +45,7 @@ class ActionManageLockOnDoor : ActionManageLockOnFence
         CodeLock codelock;
 
         if (fence) {
-            codelock = CodeLock.Cast(fence.GetCodeLock());
+            codelock = CodeLock.Cast(fence.GetCodeLockRS());
 
             if (codelock) {
                 if (codelock.GetLockState()) {
@@ -112,7 +112,7 @@ class ActionLockAdminOnBFDoor : ActionLockAdminOnFence
         CodeLock codelock;
 
         if (DB && !DB.IsOpened()) {
-            codelock = CodeLock.Cast(DB.GetCodeLock());
+            codelock = CodeLock.Cast(DB.GetCodeLockRS());
 
             if (codelock) {
                 if (codelock.GetLockState()) {
@@ -134,7 +134,7 @@ class ActionLockAdminOnBFDoor : ActionLockAdminOnFence
 
         if (DB) 
 		{
-            codelock = CodeLock.Cast(DB.GetCodeLock());
+            codelock = CodeLock.Cast(DB.GetCodeLockRS());
 
             if (codelock) 
 			{
@@ -170,7 +170,7 @@ class ActionDestroyCodeLockOnBFDoor : ActionDestroyCodeLockOnFence
         _maxHealth = 0;
 
         if (fence) {
-            Class.CastTo(codelock, fence.GetCodeLock());
+            Class.CastTo(codelock, fence.GetCodeLockRS());
 
             if (codelock && GetDayZGame().GetCodeLockConfig().CanRaidGates()) {
                 _Health = codelock.GetSynchronizedHealth();
@@ -189,7 +189,7 @@ class ActionDestroyCodeLockOnBFDoor : ActionDestroyCodeLockOnFence
         int toolDamage = GetDayZGame().GetCodeLockConfig().GetToolDamageonRaid();
 
         if (fence) {
-            CodeLock codelock = fence.GetCodeLock();
+            CodeLock codelock = fence.GetCodeLockRS();
 
             if (codelock) {
                 codelock.AddHealth("", "Health", -raidIncrementAmount);
@@ -201,7 +201,7 @@ class ActionDestroyCodeLockOnBFDoor : ActionDestroyCodeLockOnFence
                 if (_Health > 0) {
                     GetCodeLockLogger().WriteLog("RAID", action_data.m_Player.GetIdentity(), codelock.GetPosition(), "", false, false, raidIncrementAmount, _Health);
                 } else {
-                    codelock.UnlockOnServer(action_data.m_Player, fence);
+                    codelock.UnlockServer(action_data.m_Player, fence);
 
                     if (GetDayZGame().GetCodeLockConfig().DeleteLockonRaid()) {
                         codelock.Delete();
