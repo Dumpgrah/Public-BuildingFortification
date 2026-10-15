@@ -157,6 +157,7 @@ class BuildingFortficationsCore extends BaseBuildingBase
 			}
 		}
 		
+		
 		//Remove conditions
 		//conditions
 		//if ( attachment.Type() != ATTACHMENT_WOODEN_LOG )

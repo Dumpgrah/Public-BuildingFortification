@@ -1,7 +1,7 @@
 
 modded class CombinationLock
 {
-	override void UnlockServer( EntityAI player, EntityAI parent )
+	override void UnlockOnServer(EntityAI player, EntityAI parent, bool isInsideLock = false)
 	{
 		BF_DoorBarricade BF_DB = BF_DoorBarricade.Cast( parent );
 		BF_DoubleDoorBarricade BF_DDB = BF_DoubleDoorBarricade.Cast( parent );
@@ -30,7 +30,7 @@ modded class CombinationLock
 		}
 		else
 		{
-			super.UnlockServer(player, parent );
+			super.UnlockOnServer(player, parent );
 		};		
 	}
 	override bool IsLockedOnGate()

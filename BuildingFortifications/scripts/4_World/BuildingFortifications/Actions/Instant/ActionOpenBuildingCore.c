@@ -140,6 +140,5 @@ class ActionOpenBuildingCore: ActionInteractBase
 					noise.AddNoisePos(action_data.m_Player, action_data.m_Target.GetObject().GetPosition(), m_NoisePar);
 			}
 		}
-
 	};
 }

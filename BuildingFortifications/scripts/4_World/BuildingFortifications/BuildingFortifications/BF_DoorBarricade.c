@@ -334,19 +334,19 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 			if (IsCodeLocked() && BreakCodeLock == 0) 
 			{
 				
-				codelock.UnlockServer(player, this);
+				codelock.UnlockOnServer(player, this);
 			}
 			if(IsCodeLocked() && BreakCodeLock == 1)
 			{
 				codelock.SetHealth("", "", 0);
-				codelock.UnlockServer(player, this);
+				codelock.UnlockOnServer(player, this);
 			}
 		#endif
 			
 			if (IsLocked())
 			{
 				CombinationLock combination_lock = CombinationLock.Cast(FindAttachmentBySlotName(ATTACHMENT_SLOT_COMBINATION_LOCK));
-				combination_lock.UnlockServer(player , this);
+				combination_lock.UnlockOnServer(player , this);
 			}
 		}
 		
@@ -393,12 +393,12 @@ class BF_DoorBarricade extends BuildingFortficationsCore
             CodeLock codelock = GetCodeLock();
             if (codelock && BreakCodeLock == 0)
             {
-                codelock.NewUnlockServer(null, this);
+                codelock.UnlockOnServer(null, this);
 				HandleDropAttachment(GetCodeLock());
             }
 			else if(codelock && BreakCodeLock == 1)
 			{
-				codelock.NewUnlockServer(null, this);
+				codelock.UnlockOnServer(null, this);
 				codelock.SetHealth(0);
 				HandleDropAttachment(GetCodeLock());
 				
@@ -685,7 +685,7 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		}
 		else if (Class.CastTo(lock,item))
 		{
-			lock.UnlockServer(null,this);
+			lock.UnlockOnServer(null,this);
 		}
 		else if (item)//generic behaviour
 		{

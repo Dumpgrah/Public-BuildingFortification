@@ -38,7 +38,7 @@ modded class ActionDialCombinationLockOnTarget
 			{
 				
 				EntityAI target_entity = EntityAI.Cast(action_data.m_Target.GetObject());
-				combination_lock.UnlockServer(action_data.m_Player, target_entity.GetHierarchyParent());
+				combination_lock.UnlockOnServer(action_data.m_Player, target_entity.GetHierarchyParent());
 			}
 		}
 	}

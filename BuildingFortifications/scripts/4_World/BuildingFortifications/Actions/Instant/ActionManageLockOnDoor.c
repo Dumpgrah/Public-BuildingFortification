@@ -201,7 +201,7 @@ class ActionDestroyCodeLockOnBFDoor : ActionDestroyCodeLockOnFence
                 if (_Health > 0) {
                     GetCodeLockLogger().WriteLog("RAID", action_data.m_Player.GetIdentity(), codelock.GetPosition(), "", false, false, raidIncrementAmount, _Health);
                 } else {
-                    codelock.UnlockServer(action_data.m_Player, fence);
+                    codelock.UnlockOnServer(action_data.m_Player, fence);
 
                     if (GetDayZGame().GetCodeLockConfig().DeleteLockonRaid()) {
                         codelock.Delete();
