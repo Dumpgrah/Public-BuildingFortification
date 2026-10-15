@@ -12,8 +12,7 @@ modded class CombinationLock
 			{				
 				InventoryLocation inventory_location = new InventoryLocation;
 				GetInventory().GetCurrentInventoryLocation( inventory_location );			
-				BF_DB.GetInventory().SetSlotLock( inventory_location.GetSlot(), false );
-				BF_DDB.GetInventory().SetSlotLock( inventory_location.GetSlot(), false );
+				parent.GetInventory().SetSlotLock( inventory_location.GetSlot(), false );
 		
 				if (player)
 					player.ServerDropEntity( this );
