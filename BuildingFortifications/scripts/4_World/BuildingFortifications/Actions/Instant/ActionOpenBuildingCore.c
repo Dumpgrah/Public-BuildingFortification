@@ -36,7 +36,7 @@ class ActionOpenBuildingCore: ActionInteractBase
 			if ( fence && !fence.IsOpened() && fence.HasHinges())
 			{
 				#ifdef CodeLock
-          	  	codelock = CodeLock.Cast(fence.GetCodeLock());
+          	  	codelock = CodeLock.Cast(fence.GetCodeLockRS());
 				if (codelock) 
 				{
 	                if (codelock.GetLockState()) 
@@ -66,7 +66,7 @@ class ActionOpenBuildingCore: ActionInteractBase
 		PlayerBase player = action_data.m_Player;
         PlayerIdentity identity = player.GetIdentity();
 	#ifdef CodeLock 
-        CodeLock codelock = CodeLock.Cast(fence.GetCodeLock());
+        CodeLock codelock = CodeLock.Cast(fence.GetCodeLockRS());
 
 		if (codelock) {
 			if (codelock.GetLockState()) {
@@ -93,7 +93,7 @@ class ActionOpenBuildingCore: ActionInteractBase
 	
 		#ifdef CodeLock 
 	        
-       	 	CodeLock codelock = CodeLock.Cast(fence.GetCodeLock());
+       	 	CodeLock codelock = CodeLock.Cast(fence.GetCodeLockRS());
 	
 	        if (codelock) 
 			{
@@ -140,5 +140,6 @@ class ActionOpenBuildingCore: ActionInteractBase
 					noise.AddNoisePos(action_data.m_Player, action_data.m_Target.GetObject().GetPosition(), m_NoisePar);
 			}
 		}
+
 	};
 }
