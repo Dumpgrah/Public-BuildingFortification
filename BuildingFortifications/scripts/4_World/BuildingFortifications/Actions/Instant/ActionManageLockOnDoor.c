@@ -4,7 +4,7 @@ class ActionManageLockOnDoor : ActionManageLockOnFence
 	
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(target.GetObject());
-        CodeLock codelock;
+        CodeLock codelockRS;
 
         if (fence && !fence.IsOpened()) {
             if (!GetDayZGame().GetCodeLockConfig().CanOpenAnywhere()) {
@@ -15,19 +15,19 @@ class ActionManageLockOnDoor : ActionManageLockOnFence
                     return false;
                 }
             }
-            codelock = CodeLock.Cast(fence.GetCodeLock());
+            codelockRS = CodeLock.Cast(fence.GetCodeLockRS());
 
-            if (codelock) 
+            if (codelockRS) 
 			{
-                bool isOwner = codelock.IsOwner(player.GetIdentity().GetId());
-                bool isGuest = codelock.IsGuest(player.GetIdentity().GetId());
+                bool isOwner = codelockRS.IsOwner(player.GetIdentity().GetId());
+                bool isGuest = codelockRS.IsGuest(player.GetIdentity().GetId());
                 
-                if (codelock.GetLockState()) 
+                if (codelockRS.GetLockState()) 
 				{
                     if (isOwner) {
                         lockState = "Manage Lock";
                         return true;
-                    } else if (codelock.HasNoOwner()) {
+                    } else if (codelockRS.HasNoOwner()) {
                         lockState = "Claim Ownership";
                         return true;
                     }
@@ -42,16 +42,16 @@ class ActionManageLockOnDoor : ActionManageLockOnFence
         PlayerBase player = action_data.m_Player;
         PlayerIdentity identity = player.GetIdentity();
         BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(action_data.m_Target.GetObject());
-        CodeLock codelock;
+        CodeLock codelockRS;
 
         if (fence) {
-            codelock = CodeLock.Cast(fence.GetCodeLock());
+            codelockRS = CodeLock.Cast(fence.GetCodeLockRS());
 
-            if (codelock) {
-                if (codelock.GetLockState()) {
-                    if (codelock.IsOwner(identity.GetId())) {
+            if (codelockRS) {
+                if (codelockRS.GetLockState()) {
+                    if (codelockRS.IsOwner(identity.GetId())) {
                         GetCLUIManager().ShowMenu(CLMENU.ENTER_CODE_MENU, fence);
-                    } else if (codelock.HasNoOwner()) {
+                    } else if (codelockRS.HasNoOwner()) {
                         GetCLUIManager().ShowMenu(CLMENU.CLAIM_CODE_MENU, fence);
                     }
                 }
@@ -109,13 +109,13 @@ class ActionLockAdminOnBFDoor : ActionLockAdminOnFence
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) 
 	{
         BuildingFortficationsCore DB = BuildingFortficationsCore.Cast(target.GetObject());
-        CodeLock codelock;
+        CodeLock codelockRS;
 
         if (DB && !DB.IsOpened()) {
-            codelock = CodeLock.Cast(DB.GetCodeLock());
+            codelockRS = CodeLock.Cast(DB.GetCodeLockRS());
 
-            if (codelock) {
-                if (codelock.GetLockState()) {
+            if (codelockRS) {
+                if (codelockRS.GetLockState()) {
                     if (GetCLPermissionManager().UserIsAdmin(player.GetIdentity().GetPlainId())) {
                         lockState = "Admin Lock";
                         return true;
@@ -130,15 +130,15 @@ class ActionLockAdminOnBFDoor : ActionLockAdminOnFence
         PlayerBase player = action_data.m_Player;
         PlayerIdentity identity = player.GetIdentity();
         BuildingFortficationsCore DB = BuildingFortficationsCore.Cast(action_data.m_Target.GetObject());
-        CodeLock codelock;
+        CodeLock codelockRS;
 
         if (DB) 
 		{
-            codelock = CodeLock.Cast(DB.GetCodeLock());
+            codelockRS = CodeLock.Cast(DB.GetCodeLockRS());
 
-            if (codelock) 
+            if (codelockRS) 
 			{
-                if (codelock.GetLockState()) 
+                if (codelockRS.GetLockState()) 
 				{
                     if (GetCLPermissionManager().UserIsAdmin()) 
 					{
@@ -164,52 +164,58 @@ class ActionDestroyCodeLockOnBFDoor : ActionDestroyCodeLockOnFence
 	
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(target.GetObject());
-        CodeLock codelock;
+        CodeLock codelockRS;
 
         _Health = 0;
         _maxHealth = 0;
 
         if (fence) {
-            Class.CastTo(codelock, fence.GetCodeLock());
+            codelockRS = CodeLock.Cast(fence.GetCodeLockRS());
 
-            if (codelock && GetDayZGame().GetCodeLockConfig().CanRaidGates()) {
-                _Health = codelock.GetSynchronizedHealth();
-                _maxHealth = codelock.GetMaxHealth("", "Health");
+            if (codelockRS && GetDayZGame().GetCodeLockConfig().CanRaidGates()) {
+                _Health = codelockRS.GetSynchronizedHealth();
+                _maxHealth = codelockRS.GetMaxHealth("", "Health");
                 return true;
             }
         }
         return false;
     }
 
-    override void OnFinishProgressServer(ActionData action_data) {
+    override void OnFinishProgressServer(ActionData action_data) 
+	{
+		CodeLock codelockRS;
         if (!GetDayZGame().GetCodeLockConfig().CanRaidGates()) { return; }
 
         BuildingFortficationsCore fence = BuildingFortficationsCore.Cast(action_data.m_Target.GetObject());
         float raidIncrementAmount = _maxHealth / GetDayZGame().GetCodeLockConfig().GetIncrementAmount();
         int toolDamage = GetDayZGame().GetCodeLockConfig().GetToolDamageonRaid();
 
-        if (fence) {
-            CodeLock codelock = fence.GetCodeLock();
+        if (fence) 
+		{
+            codelockRS = CodeLock.Cast(fence.GetCodeLockRS());
 
-            if (codelock) {
-                codelock.AddHealth("", "Health", -raidIncrementAmount);
+            if (codelockRS) {
+                codelockRS.AddHealth("", "Health", -raidIncrementAmount);
 
-                float _Health = codelock.GetHealth();
+                float _Health = codelockRS.GetHealth();
 
-                codelock.SetSynchronizedHealth(_Health);
+                codelockRS.SetSynchronizedHealth(_Health);
 
                 if (_Health > 0) {
-                    GetCodeLockLogger().WriteLog("RAID", action_data.m_Player.GetIdentity(), codelock.GetPosition(), "", false, false, raidIncrementAmount, _Health);
-                } else {
-                    codelock.UnlockOnServer(action_data.m_Player, fence);
+                    GetCodeLockLogger().WriteLog("RAID", action_data.m_Player.GetIdentity(), codelockRS.GetPosition(), "", false, false, raidIncrementAmount, _Health);
+                } 
+				else if (codelockRS)
+				{
+					
+                    codelockRS.NewUnlockServer(action_data.m_Player, fence);
 
                     if (GetDayZGame().GetCodeLockConfig().DeleteLockonRaid()) {
-                        codelock.Delete();
+                        codelockRS.Delete();
                     }
                     if (toolDamage > 0) {
                         action_data.m_MainItem.DecreaseHealth(toolDamage, false);
                     }
-                    GetCodeLockLogger().WriteLog("RAID", action_data.m_Player.GetIdentity(), codelock.GetPosition(), "", false, true);
+                    GetCodeLockLogger().WriteLog("RAID", action_data.m_Player.GetIdentity(), codelockRS.GetPosition(), "", false, true);
                 }
             }
         }

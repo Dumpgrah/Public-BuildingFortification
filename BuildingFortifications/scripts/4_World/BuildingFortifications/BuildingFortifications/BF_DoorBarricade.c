@@ -330,16 +330,16 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		if (constrution_part.IsGate())
 		{
 		#ifdef CodeLock
-			CodeLock codelock = CodeLock.Cast(GetCodeLock());
+			CodeLock codelockRS = CodeLock.Cast(GetCodeLockRS());
 			if (IsCodeLocked() && BreakCodeLock == 0) 
 			{
 				
-				codelock.UnlockOnServer(player, this);
+				codelockRS.NewUnlockServer(player, this);
 			}
 			if(IsCodeLocked() && BreakCodeLock == 1)
 			{
-				codelock.SetHealth("", "", 0);
-				codelock.UnlockOnServer(player, this);
+				codelockRS.SetHealth("", "", 0);
+				codelockRS.NewUnlockServer(player, this);
 			}
 		#endif
 			
@@ -390,17 +390,17 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 	#ifdef CodeLock
 		if (constrution_part.IsGate() && destroyed_by_connected_part)
 		{
-            CodeLock codelock = GetCodeLock();
-            if (codelock && BreakCodeLock == 0)
+            CodeLock codelockRS = GetCodeLockRS();
+            if (codelockRS && BreakCodeLock == 0)
             {
-                codelock.UnlockOnServer(null, this);
-				HandleDropAttachment(GetCodeLock());
+                codelockRS.NewUnlockServer(null, this);
+				HandleDropAttachment(GetCodeLockRS());
             }
-			else if(codelock && BreakCodeLock == 1)
+			else if(codelockRS && BreakCodeLock == 1)
 			{
-				codelock.UnlockOnServer(null, this);
-				codelock.SetHealth(0);
-				HandleDropAttachment(GetCodeLock());
+				codelockRS.NewUnlockServer(null, this);
+				codelockRS.SetHealth(0);
+				HandleDropAttachment(GetCodeLockRS());
 				
 			}
         }

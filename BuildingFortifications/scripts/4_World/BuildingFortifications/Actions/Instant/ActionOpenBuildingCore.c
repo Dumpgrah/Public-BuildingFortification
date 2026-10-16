@@ -25,7 +25,7 @@ class ActionOpenBuildingCore: ActionInteractBase
 	{
 		Object targetObject = target.GetObject();
 		#ifdef CodeLock 
-        CodeLock codelock;
+        CodeLock codelockRS;
 		#endif
 		
 		if ( targetObject && targetObject.CanUseConstruction() )
@@ -36,10 +36,10 @@ class ActionOpenBuildingCore: ActionInteractBase
 			if ( fence && !fence.IsOpened() && fence.HasHinges())
 			{
 				#ifdef CodeLock
-          	  	codelock = CodeLock.Cast(fence.GetCodeLock());
-				if (codelock) 
+          	  	codelockRS = CodeLock.Cast(fence.GetCodeLockRS());
+				if (codelockRS) 
 				{
-	                if (codelock.GetLockState()) 
+	                if (codelockRS.GetLockState()) 
 					{
 	                    LockState = "#open";
 	                } else 
@@ -66,12 +66,13 @@ class ActionOpenBuildingCore: ActionInteractBase
 		PlayerBase player = action_data.m_Player;
         PlayerIdentity identity = player.GetIdentity();
 	#ifdef CodeLock 
-        CodeLock codelock = CodeLock.Cast(fence.GetCodeLock());
+		CodeLock codelockRS;
+        codelockRS = CodeLock.Cast(fence.GetCodeLockRS());
 
-		if (codelock) {
-			if (codelock.GetLockState()) {
-				if (codelock.IsOwner(identity.GetId()) || codelock.IsGuest(identity.GetId())) {
-					GetCodeLockLogger().WriteLog("acceSS", action_data.m_Player.GetIdentity(), codelock.GetPosition());
+		if (codelockRS) {
+			if (codelockRS.GetLockState()) {
+				if (codelockRS.IsOwner(identity.GetId()) || codelockRS.IsGuest(identity.GetId())) {
+					GetCodeLockLogger().WriteLog("acceSS", action_data.m_Player.GetIdentity(), codelockRS.GetPosition());
 					fence.OpenFence();
 					return;
 				}
@@ -89,17 +90,17 @@ class ActionOpenBuildingCore: ActionInteractBase
         PlayerBase player = action_data.m_Player;
         PlayerIdentity identity = player.GetIdentity();
 		BuildingFortficationsCore fence = BuildingFortficationsCore.Cast( action_data.m_Target.GetObject() );
-		
+		CodeLock codelockRS;
 	
 		#ifdef CodeLock 
 	        
-       	 	CodeLock codelock = CodeLock.Cast(fence.GetCodeLock());
+       	 	codelockRS = CodeLock.Cast(fence.GetCodeLockRS());
 	
-	        if (codelock) 
+	        if (codelockRS) 
 			{
-				if (codelock.GetLockState()) 
+				if (codelockRS.GetLockState()) 
 				{
-					if (!codelock.IsOwner(identity.GetId()) && !codelock.IsGuest(identity.GetId())) 
+					if (!codelockRS.IsOwner(identity.GetId()) && !codelockRS.IsGuest(identity.GetId())) 
 					{
 						GetCLUIManager().ShowMenu(CLMENU.GUEST_CODE_MENU, ItemBase.Cast(fence));
 					}
@@ -107,9 +108,9 @@ class ActionOpenBuildingCore: ActionInteractBase
 					GetCLUIManager().ShowMenu(CLMENU.SET_CODE_MENU, ItemBase.Cast(fence));
 				}
 
-				if (codelock.GetLockState()) 
+				if (codelockRS.GetLockState()) 
 				{
-					if (codelock.IsOwner(identity.GetId()) || codelock.IsGuest(identity.GetId())) 
+					if (codelockRS.IsOwner(identity.GetId()) ||codelockRS.IsGuest(identity.GetId())) 
 					{
 						return;
 					}
