@@ -183,7 +183,7 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		return "BF_DoorBarricadeKit";
 	}
 	
-	
+#ifdef DAYZ_1_29
 	override bool CanDisplayAttachmentSlot( string slot_name )
 	{
 		if (!super.CanDisplayAttachmentSlot(slot_name))
@@ -207,6 +207,32 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		}
 		return true;
 	}
+#else
+	override bool CanDisplayAttachmentSlot( int slot_id )
+	{
+		if (!super.CanDisplayAttachmentSlot(slot_id))
+			return false;
+		
+		string slotName = InventorySlots.GetSlotName(slot_id);
+		if ( slotName == "Att_CombinationLock" )
+		{
+			if ( !GetConstruction().IsPartConstructed("i_hindges"))
+			{
+				return false;
+			}
+			return true;
+		}
+		if(slotName == "CrossBoard")
+		{
+			if (BarricadeHolders())
+			{
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+#endif
 	
 	bool BarricadeHolders()
 	{
@@ -322,6 +348,7 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		UpdateVisuals();
 	}
 	
+#ifdef DAYZ_1_29
 	override void OnPartDismantledServer(notnull Man player, string part_name, int action_id)
 	{
 		ConstructionPart constrution_part = GetConstruction().GetConstructionPart(part_name);
@@ -330,16 +357,52 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		if (constrution_part.IsGate())
 		{
 		#ifdef CodeLock
-			CodeLock codelock = CodeLock.Cast(GetCodeLock());
+			CodeLock codelock = CodeLock.Cast(GetCodeLockRS());
 			if (IsCodeLocked() && BreakCodeLock == 0) 
 			{
 				
-				codelock.UnlockOnServer(player, this);
+				codelock.UnlockServer(player, this);
 			}
 			if(IsCodeLocked() && BreakCodeLock == 1)
 			{
 				codelock.SetHealth("", "", 0);
-				codelock.UnlockOnServer(player, this);
+				codelock.UnlockServer(player, this);
+			}
+		#endif
+			
+			if (IsLocked())
+			{
+				CombinationLock combination_lock = CombinationLock.Cast(FindAttachmentBySlotName(ATTACHMENT_SLOT_COMBINATION_LOCK));
+				combination_lock.UnlockServer(player , this);
+			}
+		}
+		
+		super.OnPartDismantledServer( player, part_name, action_id );
+		
+		SetGateState(CheckGateState());
+		
+		//update visuals (server)
+		UpdateVisuals();
+	}
+#else
+	override void OnPartDismantledServer(notnull Man player, string part_name, int action_id)
+	{
+		ConstructionPart constrution_part = GetConstruction().GetConstructionPart(part_name);
+		
+		//check gate state
+		if (constrution_part.IsGate())
+		{
+		#ifdef CodeLock
+			CodeLock codelock = CodeLock.Cast(GetCodeLockRS());
+			if (IsCodeLocked() && BreakCodeLock == 0) 
+			{
+				
+				codelock.UnlockServer(player, this);
+			}
+			if(IsCodeLocked() && BreakCodeLock == 1)
+			{
+				codelock.SetHealth("", "", 0);
+				codelock.UnlockServer(player, this);
 			}
 		#endif
 			
@@ -357,6 +420,7 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		//update visuals (server)
 		UpdateVisuals();
 	}
+#endif
 	
 	override void OnPartDestroyedServer(Man player, string part_name, int action_id, bool destroyed_by_connected_part = false)
 	{
@@ -390,17 +454,17 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 	#ifdef CodeLock
 		if (constrution_part.IsGate() && destroyed_by_connected_part)
 		{
-            CodeLock codelock = GetCodeLock();
+            CodeLock codelock = GetCodeLockRS();
             if (codelock && BreakCodeLock == 0)
             {
-                codelock.UnlockOnServer(null, this);
-				HandleDropAttachment(GetCodeLock());
+                codelock.NewUnlockServer(null, this);
+				HandleDropAttachment(GetCodeLockRS());
             }
 			else if(codelock && BreakCodeLock == 1)
 			{
-				codelock.UnlockOnServer(null, this);
+				codelock.NewUnlockServer(null, this);
 				codelock.SetHealth(0);
-				HandleDropAttachment(GetCodeLock());
+				HandleDropAttachment(GetCodeLockRS());
 				
 			}
         }
@@ -409,17 +473,17 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 	#ifdef EXPANSIONMODBASEBUILDING
 		if (constrution_part.IsGate() && destroyed_by_connected_part)
 		{
-            ExpansionCodeLock Ecodelock = ExpansionGetCodeLock();
+            ExpansionCodeLock Ecodelock = ExpansionGetCodeLockRS();
             if (Ecodelock && BreakCodeLock == 0)
             {
                 Ecodelock.ExpansionUnlock();
-				HandleDropAttachment(ExpansionGetCodeLock());
+				HandleDropAttachment(ExpansionGetCodeLockRS());
             }
 			else if(Ecodelock && BreakCodeLock == 1)
 			{
 				Ecodelock.ExpansionUnlock();
 				Ecodelock.SetHealth(0);
-				HandleDropAttachment(ExpansionGetCodeLock());
+				HandleDropAttachment(ExpansionGetCodeLockRS());
 				
 			}
         }
@@ -685,7 +749,11 @@ class BF_DoorBarricade extends BuildingFortficationsCore
 		}
 		else if (Class.CastTo(lock,item))
 		{
+#ifdef DAYZ_1_29
+			lock.UnlockServer(null,this);
+#else
 			lock.UnlockOnServer(null,this);
+#endif
 		}
 		else if (item)//generic behaviour
 		{
